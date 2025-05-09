@@ -37,7 +37,7 @@ from PIL import Image, ImageDraw, ImageFont
 image = Image.open('streamlit.jpeg')
 draw = ImageDraw.Draw(image)
 font = ImageFont.load_default()
-draw.text((10, 10), "Zombies!", fill=(255, 0, 0), font=font)
+draw.text((10, 10), "Zombies y!", fill=(255, 0, 0), font=font)
 
 st.image(image, caption='Zombies vs Guerrera Ninja')
 
