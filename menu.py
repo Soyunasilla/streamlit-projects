@@ -20,8 +20,8 @@ df = pd.read_csv('Employee_data.csv')
 st.write("### Datos de empleados")
 st.dataframe(df)   # o st.write(df)
 # 2) Mostrar las primeras 5 filas (header + datos)
-st.write("**Primeras filas del DataFrame:**")
-st.dataframe(df.head())
+#st.write("**Primeras filas del DataFrame:**")
+#st.dataframe(df.head())
 
 # — Control para seleccionar género —
 gender_options = df['gender'].dropna().unique().tolist()
