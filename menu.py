@@ -16,8 +16,8 @@ add_selectbox = st.sidebar.selectbox(
     ('Email', 'Home phone', 'Mobile phone')
 )
 
-st.title('BACO')
-st.write('Propuesta de Dashboard Movil')
+st.title('Socialize your knowledge')
+st.write('Se analizara el desempeño de los empleados de la empresa Socialize your knowledge')
 
 dataframe = pd.DataFrame(
     np.random.randint(1, 57, size=(6, 10)),
