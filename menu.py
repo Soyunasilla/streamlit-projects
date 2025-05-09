@@ -22,3 +22,19 @@ st.dataframe(df)   # o st.write(df)
 # 2) Mostrar las primeras 5 filas (header + datos)
 st.write("**Primeras filas del DataFrame:**")
 st.dataframe(df.head())
+
+# — Control para seleccionar género —
+gender_options = df['gender'].dropna().unique().tolist()
+
+# Crea el selectbox
+selected_gender = st.selectbox(
+    "Selecciona el género del empleado", 
+    options=gender_options
+)
+
+# Filtra el DataFrame según la selección
+df_filtrado = df[df['gender'] == selected_gender]
+
+# Muestra los datos filtrados
+st.write(f"#### Empleados con género: {selected_gender}")
+st.dataframe(df_filtrado)
