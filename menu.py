@@ -38,3 +38,22 @@ df_filtrado = df[df['gender'] == selected_gender]
 # Muestra los datos filtrados
 st.write(f"#### Empleados con género: {selected_gender}")
 st.dataframe(df_filtrado)
+
+# Calcular los valores mínimos y máximos
+
+min_score = int(df['performance_score'].min())
+max_score = int(df['performance_score'].max())
+
+selected_range= st.slider(
+"Selecciona un rango de desempeño#,
+    min_values=min_score,
+    max_values=max_score,
+    value=(min_score, max_score),
+    step=1
+    )
+
+low, high = selected_range
+df_filtered=df[('performance_score'] >= low) & (df['performance_score'] <= high)]
+
+st.write(f"### Empleados con desempeño entre {low} y {high}")
+st.dataframe(df_filtered)
