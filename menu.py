@@ -9,6 +9,3 @@ st.write('Se analizara el desempeño de los empleados de la empresa Socialize yo
 image = Image.open('Streamlit.jpeg')
 draw = ImageDraw.Draw(image)
 font = ImageFont.load_default()
-draw.text((10, 10), "Zombies y!", fill=(255, 0, 0), font=font)
-
-st.image(image, caption='Zombies vs Guerrera Ninja')
