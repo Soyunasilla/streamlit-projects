@@ -46,14 +46,14 @@ max_score = int(df['performance_score'].max())
 
 selected_range= st.slider(
 "Selecciona un rango de desempeño",
-    min_values=min_score,
-    max_values=max_score,
+    min_value=min_score,
+    max_value=max_score,
     value=(min_score, max_score),
     step=1
     )
 
 low, high = selected_range
-df_filtered=df[('performance_score'] >= low) & (df['performance_score'] <= high)]
+df_filtered=df[(df['performance_score'] >= low) & (df['performance_score'] <= high)]
 
 st.write(f"### Empleados con desempeño entre {low} y {high}")
 st.dataframe(df_filtered)
