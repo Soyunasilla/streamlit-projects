@@ -45,7 +45,7 @@ min_score = int(df['performance_score'].min())
 max_score = int(df['performance_score'].max())
 
 selected_range= st.slider(
-"Selecciona un rango de desempeño#,
+"Selecciona un rango de desempeño",
     min_values=min_score,
     max_values=max_score,
     value=(min_score, max_score),
