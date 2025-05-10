@@ -75,3 +75,16 @@ df_marital = df[df['marital_status'] == selected_marital]
 st.write(f"### Empleados con estado civil: {selected_marital}")
 st.dataframe(df_marital)
 
+import altair as alt
+
+chart = (
+    alt.Chart(df)
+       .mark_bar()
+       .encode(
+           alt.X('performance_score:Q', bin=alt.Bin(step=1), title='Score'),
+           alt.Y('count()', title='Número de empleados')
+       )
+       .properties(title='Distribución de Puntajes')
+)
+st.altair_chart(chart, use_container_width=True)
+
