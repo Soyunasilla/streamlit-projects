@@ -58,15 +58,20 @@ df_filtered=df[(df['performance_score'] >= low) & (df['performance_score'] <= hi
 st.write(f"### Empleados con desempeño entre {low} y {high}")
 st.dataframe(df_filtered)
 
+# — Control para seleccionar estado civil —
+# 1) Lista de valores únicos (sin NaN)
 marital_options = df['marital_status'].dropna().unique().tolist()
 
+# 2) Selectbox de Streamlit
 selected_marital = st.selectbox(
-    "Seleccionar estado civil:",
+    "Selecciona el estado civil del empleado",
     options=marital_options
 )
 
+# 3) Filtrado del DataFrame
 df_marital = df[df['marital_status'] == selected_marital]
 
+# 4) Mostrar resultados
 st.write(f"### Empleados con estado civil: {selected_marital}")
 st.dataframe(df_marital)
 
