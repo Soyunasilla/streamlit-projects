@@ -57,3 +57,16 @@ df_filtered=df[(df['performance_score'] >= low) & (df['performance_score'] <= hi
 
 st.write(f"### Empleados con desempeño entre {low} y {high}")
 st.dataframe(df_filtered)
+
+marital_options = df['marital_status'].dropna().unique().tolist()
+
+selected_marital = st.selectbox(
+    "Seleccionar estado civil:",
+    options=marital_options
+)
+
+df_marital = df[df['marital_status'] == selected_marital]
+
+st.write(f"### Empleados con estado civil: {selected_marital}")
+st.dataframe(df_marital)
+
