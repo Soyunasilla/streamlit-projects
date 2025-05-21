@@ -88,7 +88,24 @@ chart = (
 )
 st.altair_chart(chart, use_container_width=True)
 
-
+chart = (
+    alt.Chart(df)
+       .transform_aggregate(
+           mean_hours="mean(average_work_hours)",
+           groupby=["gender"]
+       )
+       .mark_bar()
+       .encode(
+           x=alt.X("gender:N", title="Género"),
+           y=alt.Y("mean_hours:Q", title="Horas Trabajadas Promedio"),
+           color=alt.Color("gender:N", legend=None)
+       )
+       .properties(
+           title="Promedio de Horas Trabajadas por Género",
+           width=600,
+           height=400
+       )
+)
 
 
 
