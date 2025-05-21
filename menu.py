@@ -126,8 +126,10 @@ scatter = (
 )
 st.altair_chart(scatter, use_container_width=True)
 
+
 # Relación del promedio de horas trabajadas versus el puntaje de desempeño
-scatter = (
+
+scatter2 = (
     alt.Chart(df)
        .mark_circle(size=60, opacity=0.7)
        .encode(
@@ -141,5 +143,6 @@ scatter = (
            height=400
        )
 )
-st.altair_chart(scatter, use_container_width=True)
+
+st.altair_chart(scatter2, use_container_width=True)
 
