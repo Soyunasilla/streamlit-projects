@@ -126,7 +126,6 @@ scatter = (
 )
 st.altair_chart(scatter, use_container_width=True)
 
-
 # Relación del promedio de horas trabajadas versus el puntaje de desempeño
 
 scatter2 = (
@@ -143,7 +142,6 @@ scatter2 = (
            height=400
        )
 )
-
 st.altair_chart(scatter2, use_container_width=True)
 
 # Conclusión Global del Análisis 
