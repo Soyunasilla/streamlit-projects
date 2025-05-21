@@ -144,7 +144,7 @@ scatter2 = (
 )
 st.altair_chart(scatter2, use_container_width=True)
 
-# Conclusión Global del Análisis 
+# — Conclusión Global del Análisis —
 st.markdown("## Conclusión Global del Análisis")
 
 # 1) Métricas generales
@@ -159,8 +159,16 @@ top_marital     = df['marital_status'].value_counts().idxmax()
 pct_top_gender  = df['gender'].value_counts(normalize=True).max() * 100
 pct_top_marital = df['marital_status'].value_counts(normalize=True).max() * 100
 
-# 3) Correlación (ya calculada antes)
+# 3) Correlación (ya la tienes en 'corr')
 # corr = df['average_work_hours'].corr(df['performance_score'])
+
+# 3.1) Define de nuevo 'relation' según el signo de corr
+if corr > 0:
+    relation = "positiva"
+elif corr < 0:
+    relation = "negativa"
+else:
+    relation = "nula"
 
 # 4) Texto de conclusión
 st.markdown(f"- Se analizaron **{total_emp}** empleados en total.")
@@ -170,14 +178,16 @@ st.markdown(
     f"- El género más frecuente es **{top_gender}** ({pct_top_gender:.1f}% de la plantilla) "
     f"y el estado civil más común es **{top_marital}** ({pct_top_marital:.1f}%)."
 )
-# Reusa la variable `relation` que ya determinaste antes
-st.markdown(f"- La correlación entre horas trabajadas y puntaje de desempeño es **{corr:.2f}**, indicando una relación **{relation}**.")
+st.markdown(
+    f"- La correlación entre horas trabajadas y puntaje de desempeño es **{corr:.2f}**, "
+    f"indicando una relación **{relation}**."
+)
 
 # 5) Recomendación
 st.markdown(
     "> 💡 **Recomendación Global:**\n"
-    "- Analizar las prácticas de los empleados con mejores puntajes y más horas trabajadas para "
-    "replicar sus hábitos en todo el equipo.\n"
+    "- Analizar las prácticas de los empleados con mejores puntajes y más horas trabajadas para replicar sus hábitos en todo el equipo.\n"
     "- Considerar programas de balance vida-trabajo si la correlación “positiva” sugiere riesgo de burnout.\n"
     "- Revisar si ciertos grupos (por género o estado civil) presentan brechas de desempeño que requieran acciones de formación específicas."
 )
+
