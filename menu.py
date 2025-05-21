@@ -146,43 +146,40 @@ scatter2 = (
 
 st.altair_chart(scatter2, use_container_width=True)
 
+# Conclusión Global del Análisis 
+st.markdown("## Conclusión Global del Análisis")
 
-# — Cálculo de correlación —
-corr = df['average_work_hours'].corr(df['performance_score'])
+# 1) Métricas generales
+total_emp   = len(df)
+avg_perf    = df['performance_score'].mean()
+avg_hours   = df['average_work_hours'].mean()
+median_perf = df['performance_score'].median()
 
-# — Cálculo de promedios para empleados por encima y por debajo de la media de horas —
-mean_hours = df['average_work_hours'].mean()
-high_df   = df[df['average_work_hours'] > mean_hours]
-low_df    = df[df['average_work_hours'] <= mean_hours]
+# 2) Distribuciones más comunes
+top_gender      = df['gender'].value_counts().idxmax()
+top_marital     = df['marital_status'].value_counts().idxmax()
+pct_top_gender  = df['gender'].value_counts(normalize=True).max() * 100
+pct_top_marital = df['marital_status'].value_counts(normalize=True).max() * 100
 
-avg_perf_high = high_df['performance_score'].mean()
-avg_perf_low  = low_df['performance_score'].mean()
+# 3) Correlación (ya calculada antes)
+# corr = df['average_work_hours'].corr(df['performance_score'])
 
-# — Despliegue de la conclusión —
-st.markdown("## Conclusión del Análisis")
-
-# Texto principal sobre la correlación
-if corr > 0:
-    relation = "positiva"
-elif corr < 0:
-    relation = "negativa"
-else:
-    relation = "nula"
-
-st.markdown(f"- La **correlación** entre horas trabajadas y puntaje de desempeño es de **{corr:.2f}**, " \
-            f"indicando una relación **{relation}**.")
-
-# Comparativa de desempeño según horas
+# 4) Texto de conclusión
+st.markdown(f"- Se analizaron **{total_emp}** empleados en total.")
+st.markdown(f"- El puntaje de desempeño promedio es **{avg_perf:.2f}** (mediana: {median_perf:.1f}).")
+st.markdown(f"- Las horas trabajadas promedio son **{avg_hours:.2f}** horas.")
 st.markdown(
-    f"- Los empleados que trabajan **por encima** de la media de horas ({mean_hours:.1f} h) tienen un puntaje " \
-    f"promedio de **{avg_perf_high:.1f}**, mientras que quienes trabajan **igual o menos** horas que la media " \
-    f"tienen un puntaje promedio de **{avg_perf_low:.1f}**."
+    f"- El género más frecuente es **{top_gender}** ({pct_top_gender:.1f}% de la plantilla) "
+    f"y el estado civil más común es **{top_marital}** ({pct_top_marital:.1f}%)."
 )
+# Reusa la variable `relation` que ya determinaste antes
+st.markdown(f"- La correlación entre horas trabajadas y puntaje de desempeño es **{corr:.2f}**, indicando una relación **{relation}**.")
 
-# Recomendación práctica
+# 5) Recomendación
 st.markdown(
-    "> 💡 **Recomendación:** Si buscamos mejorar el desempeño, podríamos revisar qué prácticas llevan " \
-    "aquellos que trabajan más horas y replicarlas en el resto del equipo."
+    "> 💡 **Recomendación Global:**\n"
+    "- Analizar las prácticas de los empleados con mejores puntajes y más horas trabajadas para "
+    "replicar sus hábitos en todo el equipo.\n"
+    "- Considerar programas de balance vida-trabajo si la correlación “positiva” sugiere riesgo de burnout.\n"
+    "- Revisar si ciertos grupos (por género o estado civil) presentan brechas de desempeño que requieran acciones de formación específicas."
 )
-
-
