@@ -160,7 +160,7 @@ pct_top_gender  = df['gender'].value_counts(normalize=True).max() * 100
 pct_top_marital = df['marital_status'].value_counts(normalize=True).max() * 100
 
 # 3) Correlación (ya la tienes en 'corr')
-# corr = df['average_work_hours'].corr(df['performance_score'])
+corr = df['average_work_hours'].corr(df['performance_score'])
 
 # 3.1) Define de nuevo 'relation' según el signo de corr
 if corr > 0:
@@ -178,6 +178,10 @@ st.markdown(
     f"- El género más frecuente es **{top_gender}** ({pct_top_gender:.1f}% de la plantilla) "
     f"y el estado civil más común es **{top_marital}** ({pct_top_marital:.1f}%)."
 )
+st.markdown(
+    f"- La correlación entre horas trabajadas y puntaje de desempeño es **{corr:.2f}**, "
+    f"indicando una relación **{relation}**."
+)
 
 # 5) Recomendación
 st.markdown(
@@ -186,4 +190,5 @@ st.markdown(
     "- Considerar programas de balance vida-trabajo si la correlación “positiva” sugiere riesgo de burnout.\n"
     "- Revisar si ciertos grupos (por género o estado civil) presentan brechas de desempeño que requieran acciones de formación específicas."
 )
+
 
