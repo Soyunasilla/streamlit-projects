@@ -88,9 +88,6 @@ chart = (
 )
 st.altair_chart(chart, use_container_width=True)
 
-
-import altair as alt
-import streamlit as st
 chart = (
     alt.Chart(df)
        .transform_aggregate(
@@ -112,5 +109,23 @@ chart = (
 
 st.altair_chart(chart, use_container_width=True)
 
+# 1) Construcción del scatter plot con Altair
+scatter = (
+    alt.Chart(df)
+       .mark_circle(size=60, opacity=0.7)
+       .encode(
+           x=alt.X('age:Q', title='Edad'),
+           y=alt.Y('salary:Q', title='Salario'),
+           tooltip=['age', 'salary']   # muestra valores al pasar el cursor
+       )
+       .properties(
+           title='Relación Edad vs Salario de los Empleados',
+           width=600,
+           height=400
+       )
+)
+
+# 2) Mostrar en Streamlit
+st.altair_chart(scatter, use_container_width=True)
 
 
