@@ -178,10 +178,6 @@ st.markdown(
     f"- El género más frecuente es **{top_gender}** ({pct_top_gender:.1f}% de la plantilla) "
     f"y el estado civil más común es **{top_marital}** ({pct_top_marital:.1f}%)."
 )
-st.markdown(
-    f"- La correlación entre horas trabajadas y puntaje de desempeño es **{corr:.2f}**, "
-    f"indicando una relación **{relation}**."
-)
 
 # 5) Recomendación
 st.markdown(
