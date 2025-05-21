@@ -2,10 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-
+# Título y una breve descripción de la aplicación web
 st.title('Socialize your knowledge')
 st.write('Se analizara el desempeño de los empleados de la empresa Socialize your knowledge')
 
+#Logotipo de la empresa en la aplicación web
 from PIL import Image, ImageDraw, ImageFont
 
 image = Image.open('Streamlit.jpeg')
@@ -15,7 +16,7 @@ draw.text((10, 10), "Socialize your Knowledge!", fill=(255, 0, 0), font=font)
 
 st.image(image, caption='Socialize your Knowledge')
 
-# --- Carga directa desde el archivo en el repo ---
+
 df = pd.read_csv('Employee_data.csv')
 #st.write("### Datos de empleados")
 #st.dataframe(df)   # o st.write(df)
@@ -23,19 +24,17 @@ df = pd.read_csv('Employee_data.csv')
 #st.write("**Primeras filas del DataFrame:**")
 #st.dataframe(df.head())
 
-# — Control para seleccionar género —
+# desplegar un control para seleccionar el género del empleado
 gender_options = df['gender'].dropna().unique().tolist()
 
-# Crea el selectbox
 selected_gender = st.selectbox(
     "Selecciona el género del empleado", 
     options=gender_options
 )
 
-# Filtra el DataFrame según la selección
+# seleccionar un rango del puntaje de desempeño del empleado
 df_filtrado = df[df['gender'] == selected_gender]
 
-# Muestra los datos filtrados
 st.write(f"#### Empleados con género: {selected_gender}")
 st.dataframe(df_filtrado)
 
@@ -58,20 +57,17 @@ df_filtered=df[(df['performance_score'] >= low) & (df['performance_score'] <= hi
 st.write(f"### Empleados con desempeño entre {low} y {high}")
 st.dataframe(df_filtered)
 
-# — Control para seleccionar estado civil —
-# 1) Lista de valores únicos (sin NaN)
+# seleccionar el estado civil del empleado
+
 marital_options = df['marital_status'].dropna().unique().tolist()
 
-# 2) Selectbox de Streamlit
 selected_marital = st.selectbox(
     "Selecciona el estado civil del empleado",
     options=marital_options
 )
 
-# 3) Filtrado del DataFrame
 df_marital = df[df['marital_status'] == selected_marital]
 
-# 4) Mostrar resultados
 st.write(f"### Empleados con estado civil: {selected_marital}")
 st.dataframe(df_marital)
 
@@ -88,6 +84,7 @@ chart = (
 )
 st.altair_chart(chart, use_container_width=True)
 
+#distribución de los puntajes de desempeño.
 chart = (
     alt.Chart(df)
        .transform_aggregate(
@@ -126,7 +123,7 @@ scatter = (
 )
 st.altair_chart(scatter, use_container_width=True)
 
-# Relación del promedio de horas trabajadas versus el puntaje de desempeño
+#Relación del promedio de horas trabajadas versus el puntaje de desempeño
 
 scatter2 = (
     alt.Chart(df)
@@ -144,25 +141,22 @@ scatter2 = (
 )
 st.altair_chart(scatter2, use_container_width=True)
 
-# — Conclusión Global del Análisis —
+#— Conclusión Global del Análisis —
 st.markdown("## Conclusión Global del Análisis")
 
-# 1) Métricas generales
+#Métricas generales
 total_emp   = len(df)
 avg_perf    = df['performance_score'].mean()
 avg_hours   = df['average_work_hours'].mean()
 median_perf = df['performance_score'].median()
 
-# 2) Distribuciones más comunes
 top_gender      = df['gender'].value_counts().idxmax()
 top_marital     = df['marital_status'].value_counts().idxmax()
 pct_top_gender  = df['gender'].value_counts(normalize=True).max() * 100
 pct_top_marital = df['marital_status'].value_counts(normalize=True).max() * 100
 
-# 3) Correlación (ya la tienes en 'corr')
 corr = df['average_work_hours'].corr(df['performance_score'])
 
-# 3.1) Define de nuevo 'relation' según el signo de corr
 if corr > 0:
     relation = "positiva"
 elif corr < 0:
@@ -170,7 +164,7 @@ elif corr < 0:
 else:
     relation = "nula"
 
-# 4) Texto de conclusión
+
 st.markdown(f"- Se analizaron **{total_emp}** empleados en total.")
 st.markdown(f"- El puntaje de desempeño promedio es **{avg_perf:.2f}** (mediana: {median_perf:.1f}).")
 st.markdown(f"- Las horas trabajadas promedio son **{avg_hours:.2f}** horas.")
@@ -183,12 +177,5 @@ st.markdown(
     f"indicando una relación **{relation}**."
 )
 
-# 5) Recomendación
-st.markdown(
-    "> 💡 **Recomendación Global:**\n"
-    "- Analizar las prácticas de los empleados con mejores puntajes y más horas trabajadas para replicar sus hábitos en todo el equipo.\n"
-    "- Considerar programas de balance vida-trabajo si la correlación “positiva” sugiere riesgo de burnout.\n"
-    "- Revisar si ciertos grupos (por género o estado civil) presentan brechas de desempeño que requieran acciones de formación específicas."
-)
 
 
