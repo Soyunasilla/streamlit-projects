@@ -107,9 +107,9 @@ chart = (
        )
 )
 
+# Edad de los empleados con respecto al salario de los mismo
 st.altair_chart(chart, use_container_width=True)
 
-# 1) Construcción del scatter plot con Altair
 scatter = (
     alt.Chart(df)
        .mark_circle(size=60, opacity=0.7)
@@ -124,8 +124,22 @@ scatter = (
            height=400
        )
 )
-
-# 2) Mostrar en Streamlit
 st.altair_chart(scatter, use_container_width=True)
 
+# Relación del promedio de horas trabajadas versus el puntaje de desempeño
+scatter = (
+    alt.Chart(df)
+       .mark_circle(size=60, opacity=0.7)
+       .encode(
+           x=alt.X('average_work_hours:Q', title='Horas Trabajadas Promedio'),
+           y=alt.Y('performance_score:Q', title='Puntaje de Desempeño'),
+           tooltip=['average_work_hours', 'performance_score']
+       )
+       .properties(
+           title='Relación: Horas Trabajadas vs Puntaje de Desempeño',
+           width=600,
+           height=400
+       )
+)
+st.altair_chart(scatter, use_container_width=True)
 
